@@ -24,7 +24,13 @@ target/
 *.mo
 *.pot
 local_settings.py
-.env
+
+# IMPORTANT: For demonstration purposes only, you might want to 
+# ignore the .env file if it contains sensitive information 
+# like secret keys or database credentials.
+
+# .env
+
 db.sqlite3
 media/
 static_collected/
