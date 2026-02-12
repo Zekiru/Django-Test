@@ -1,8 +1,5 @@
-# Python
-*.pyc
-__pycache__
-*.log
-.Python
+# Virtual environments
+myenv/
 env/
 venv/
 lib/
@@ -10,6 +7,12 @@ lib64/
 include/
 bin/
 share/
+
+# Python
+*.pyc
+__pycache__
+*.log
+.Python
 pip-log.txt
 pip-delete-this-directory.txt
 htmlcov/
@@ -24,13 +27,7 @@ target/
 *.mo
 *.pot
 local_settings.py
-
-# IMPORTANT: For demonstration purposes only, you might want to 
-# ignore the .env file if it contains sensitive information 
-# like secret keys or database credentials.
-
 # .env
-
 db.sqlite3
 media/
 static_collected/
