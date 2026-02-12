@@ -39,8 +39,8 @@ pip install -r requirements.txt
 python mysite/manage.py runserver
 ```
 
-### Notes
+### Note
 
-The .env file is already tracked in this repository since this is a Django demonstration project.
+The .env file is already tracked in this repository for the sake of convenience. (In actual practice this will be ommited)
 
-No additional environment configuration is required.
+CSCI 40
