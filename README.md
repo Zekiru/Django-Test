@@ -41,6 +41,4 @@ python mysite/manage.py runserver
 
 ### Note
 
-The .env file is already tracked in this repository for the sake of convenience. (In actual practice this will be ommited)
-
-CSCI 40
+CSCI 40 Test Project
