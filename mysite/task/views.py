@@ -2,15 +2,18 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import TaskGroup, Task
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
 def index(request):
     return redirect('task-list')
 
-class TaskListView(TemplateView):
+class TaskListView(LoginRequiredMixin, TemplateView):
     template_name = 'tasks/task_list.html'
+    redirect_field_name = ''
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -23,6 +26,6 @@ class TaskListView(TemplateView):
         Task.objects.create(
             name=task_name,
             due_date="2026-12-31T23:59:59",
-            taskgroup=TaskGroup.objects.first()   # Assuming there is at least one TaskGroup
+            taskgroup=TaskGroup.objects.first()
         )
         return redirect('task-list')
