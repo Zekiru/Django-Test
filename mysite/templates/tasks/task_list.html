@@ -3,38 +3,21 @@
 
 {% block title %}Task List{% endblock %}
 {% block content %}
-    <section>
-        <h1>Task List</h1>
-        {% for task in tasks %}
-            <div class="list-item">
-                <h3>{{ task }}</h3>
-            </div>
-        {% endfor %}
-    </section>
-    <hr>
+    <h1>Task List</h1>
     <section class="form-wrapper">
         <form method="POST" class="form-group">
             {% csrf_token %}
-            <label for="task_name">
-                <span>Task Name:</span>
-                <input type="text" name="task_name" id="task_name">
-            </label>
-            <br>
-            <label for="due_date">
-                <span>Due Date:</span>
-                <input type="datetime-local" name="due_date" id="due_date">
-            </label>
-            <br>
-            <label for="taskgroup">
-                <span>Task Group:</span>
-                <select name="taskgroup" id="taskgroup">
-                    {% for taskgroup in taskgroups %}
-                        <option value="{{ taskgroup.id }}">{{ taskgroup.name }}</option>
-                    {% endfor %}
-                </select>
-            </label>
+            {{ form.as_p }}
             <br>
             <button type="submit">Add Task</button>
         </form>
+    </section>
+    <br><hr>
+    <section>
+    {% for task in tasks %}
+        <div class="list-item">
+            <h3>{{ task }}</h3>
+        </div>
+    {% endfor %}
     </section>
 {% endblock %}

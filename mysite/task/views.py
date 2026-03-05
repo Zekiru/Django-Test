@@ -4,6 +4,8 @@ from .models import TaskGroup, Task
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from .forms import TaskForm
+
 # Create your views here.
 
 # from django.http import HttpResponse
@@ -13,22 +15,28 @@ def index(request):
 
 class TaskListView(LoginRequiredMixin, TemplateView):
     template_name = 'tasks/task_list.html'
+    form_class = TaskForm
     redirect_field_name = ''
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tasks'] = Task.objects.all()
         context['taskgroups'] = TaskGroup.objects.all()
+        context['form'] = TaskForm()
         return context
 
     def post(self, request, *args, **kwargs):
-        # print(request.POST.get('task_name'))
+        form = TaskForm(request.POST)
         task_name = request.POST.get('task_name')
         due_date = request.POST.get('due_date')
         taskgroup = request.POST.get('taskgroup')
-        Task.objects.create(
-            name=task_name,
-            due_date=due_date,
-            taskgroup=TaskGroup.objects.get(id=taskgroup)
-        )
+        if form.is_valid():
+            Task.objects.create(
+                name=task_name,
+                due_date=due_date,
+                taskgroup=TaskGroup.objects.get(id=taskgroup)
+            )
+            return redirect('task-list')
+        context = self.get_context_data()
+        context['form'] = form
         return redirect('task-list')
